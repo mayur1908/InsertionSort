@@ -1,54 +1,45 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 
-namespace BubbleSort
+class AnagramDetection
 {
-    public class Program
+    static bool AreAnagrams(string str1, string str2)
     {
-        // Method to perform Bubble Sort on an array of integers
-        static void Sort(int[] arr)
-        {
-            int n = arr.Length;
+        // Convert the input strings to char arrays
+        char[] charArray1 = str1.ToCharArray();
+        char[] charArray2 = str2.ToCharArray();
 
-            for (int i = 0; i < n - 1; i++)
-            {
-                for (int j = 0; j < n - i - 1; j++)
-                {
-                    // Compare adjacent elements and swap if the order is incorrect
-                    if (arr[j] > arr[j + 1])
-                    {
-                        int temp = arr[j];
-                        arr[j] = arr[j + 1];
-                        arr[j + 1] = temp;
-                    }
-                }
-            }
+        // Sort the char arrays in ascending order
+        Array.Sort(charArray1);
+        Array.Sort(charArray2);
+
+        // Convert the sorted char arrays back to strings
+        string sortedStr1 = new string(charArray1);
+        string sortedStr2 = new string(charArray2);
+
+        // Compare the sorted strings to check if they are equal
+        return sortedStr1.Equals(sortedStr2);
+    }
+
+   public static void Main()
+    {
+        // Get input strings from the user
+        Console.WriteLine("Enter the first string: ");
+        string str1 = Console.ReadLine();
+
+        Console.WriteLine("Enter the second string: ");
+        string str2 = Console.ReadLine();
+
+        // Check if the strings are anagrams
+        bool areAnagrams = AreAnagrams(str1, str2);
+
+        // Display the result
+        if (areAnagrams)
+        {
+            Console.WriteLine("The two strings are anagrams.");
         }
-        static void Main(string[] args)
+        else
         {
-            Console.WriteLine("Enter the number of elements: ");
-            int count = int.Parse(Console.ReadLine());
-
-            int[] arr = new int[count];
-
-            Console.WriteLine("Enter the elements:");
-
-            for (int i = 0; i < count; i++)
-            {
-                arr[i] = int.Parse(Console.ReadLine());
-            }
-
-            Sort(arr);  // Call the Sort method to sort the array
-
-            Console.WriteLine("Sorted List:");
-
-            for (int i = 0; i < count; i++)
-            {
-                Console.Write(arr[i] + " ");
-            }
+            Console.WriteLine("The two strings are not anagrams.");
         }
     }
 }
